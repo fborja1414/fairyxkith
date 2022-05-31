@@ -1,7 +1,7 @@
 <template>
 <div :class="'component-container-' + entry.id" @click='toggleWindow'>
     <div class="blog-container" v-if="entry.BlogBool" :class= entry.position>
-         <div class="window">
+           <div class="window">
         <div class="window-bar">
           <div class="window-circles">
           <div class="window_circles"></div>
@@ -12,14 +12,19 @@
             </div>
       </div>
         <div class="blog-wrapper">
-            <div class="blog-title">{{entry.Title}}</div>
-            <div class="blog-date">{{entry.date}}</div>
-            <div class="blog-text">{{entry.bodytext}}</div>
+            <div v-if="entry.imageBool">
+            <img class="image" src="../assets/pompompurin-sanrio.gif" @load="setBlogDimension" /> 
+             </div>
+            <div>
+             <div v-if="entry.title != ''" class="blog-title">{{entry.Title}}</div>
+            <div v-if="entry.date != ''" class="blog-date">{{entry.date}}</div>
+            <div v-if="entry.bodytext != ''" class="blog-text">{{entry.bodytext}}</div>
             </div>
              <div class="blog-circles">
           <div class="window_circles"></div>
           <div class="window_circles"></div>
           <div class="window_circles"></div>
+          </div>
           </div>
     </div>
     <div class="note-container" v-if="entry.NoteBool" :class= entry.position>
@@ -52,7 +57,38 @@ export default {
         toggleWindow(){
             if(!this.entry.NoteBool)
             this.$store.commit('togglePop',true);
+            this.$store.commit('updateBlogIndex',this.entry.index);
+        },
+        // in backend set blog width using Max Width but image width will always be default image width size
+        // for image only posts, title is omitted
+
+        //for notes, color will have 4 different font color options
+        setBlogDimension(event){
+            let image=event.target;
+            console.log(image);
+            var imageWidth = image.clientWidth;
+            var imageHeight = image.clientHeight;
+            //  image.style.maxWidth = this.entry.maxWidth + "vw";
+           // console.log
+            //var imageWidth = imageDims.x;
+            console.log(imageWidth);
+            var blogString = '.component-container-' + this.entry.id;
+            console.log(blogString);
+            var currBlog = document.querySelector('.blog-container');
+          console.log(currBlog);
+       if(this.entry.maxWidth !=null){ 
+            currBlog.style.width = this.entry.maxWidth +  "vw";
+            currBlog.style.height = this.entry.maxWidth +  "vw";
+         currBlog.style.maxWidth = this.entry.maxWidth + "vw";
+            }
+            else{
+   currBlog.style.width= imageWidth + 50 + 'px';
+          currBlog.style.height = imageHeight + 100 + 'px';
+            
+            }
+            // let imageContainer = image.q
         }
+
     },
 
 
@@ -121,6 +157,7 @@ export default {
     cursor:pointer;
     position:relative;
     background:white;
+    overflow:scroll;
     z-index: 4;
     width:52vw;
     height:25vw;
@@ -163,9 +200,10 @@ export default {
 }
 
 .blog-circles{
-    position:absolute;
+   // position:absolute;
        display: flex;
        justify-content: center;
+       padding-top:1rem;
     bottom:2rem;
     left:1rem;
     text-align: center;
@@ -188,12 +226,20 @@ export default {
   
 }
 
+.image{
+    //width:100%;
+   // height:20vw;
+    z-index:120;
+    max-width:20vw;
+    margin-bottom: 3rem;
+}
+
 .note-text{
     padding:1rem;
     font-family: Daydream;
     font-size: 50px;
     height:calc(90% - 24px);
-       overflow:hidden;
+       overflow:scroll;
     color:#EFFF8B;
 }
 .right-offset-window{
@@ -230,6 +276,12 @@ export default {
      margin-left: 8vw;
     transform: translateY(-40vw);
     z-index:7;
+}
+
+.center-high-window{
+    margin-left:25vw;
+    transform: translateY(-30vw);
+    z-index:5;
 }
 
 </style>

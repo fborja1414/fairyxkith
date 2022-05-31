@@ -6,7 +6,7 @@
           </div>
   </div>
   <div class="innerPage">
-    <blog-component />
+    <blog-component :Blog="Blog"/>
     </div>
     <div class="index_filter" :class="{'fadeIn': windowToggle, 'fadeOut': !windowToggle}"></div>
   <div class="index-wrapper">
@@ -76,11 +76,13 @@ export default {
             Blog:[
             {
                 BlogBool:true,
+                imageBool:true,
                 id:1,
-                Title: "Fairy Kith Blog Title",
-                date: "May 23,2022",
-                bodytext: "Knock on the door at the drew house and expect to be greeted by a group of friends—or as they consider themselves, family—surrounded by skateboards, teddy bears, and VHS tapes from garage sale scores. Located in the San Fernando Valley, the real-life home that gives shape to the eponymous clothing label founded in 2018 by Justin Bieber and creative director Ryan Good is Knock on the door at the drew house and expect to be greeted by a group of friends—or as they consider themselves, family—surrounded by skateboards, teddy bears, and VHS tapes from garage sale scores. Located in the San Fernando Valley, the real-life home that gives shape to the eponymous clothing label founded in 2018 by Justin Bieber and creative director Ryan Good is Knock on the door at the drew house and expect to be greeted by a group of friends—or as they consider themselves, family—surrounded by skateboards, teddy bears, and VHS tapes from garage sale scores. Located in the San Fernando Valley, the real-life home that gives shape to the eponymous clothing label founded in 2018 by Justin Bieber and creative director Ryan Good is Knock on the door at the drew house and expect to be greeted by a group of friends—or as they consider themselves, family—surrounded by skateboards, teddy bears, and VHS tapes from garage sale scores. Located in the San Fernando Valley, the real-life home that gives shape to the eponymous clothing label founded in 2018 by Justin Bieber and creative director Ryan Good is ",
+                Title: "",
+                date: "",
+                bodytext: "",
                 position: "right-offset-window",
+                maxWidth: null,
             },
             {
                 BlogBool:true,
@@ -154,8 +156,8 @@ export default {
   position:fixed;
   left:0px;
   z-index:104;
-    background: #E7A6BE;
-  mix-blend-mode: overlay;
+    background: #FF93BB;
+  mix-blend-mode: lighten;
 }
 
 .fadeOut {

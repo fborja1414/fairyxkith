@@ -19,6 +19,9 @@
 <script>
 export default {
     name:"BlogComponent",
+    props: {
+        Blog:Array,
+    },
 
     computed:{
         windowToggle(){
@@ -32,6 +35,7 @@ export default {
             const windowBoolean = this.$store.state.popBool;
             if(windowBoolean) {
                 document.body.classList.add("switchoverflow");
+                this.filterBlog(this.Blog);
             } else{
                 document.body.classList.remove("switchoverflow");
             }
@@ -41,6 +45,15 @@ export default {
     methods:{
     toggleWindowOff(){
         this.$store.commit("togglePop", false);
+    },
+    filterBlog(blog){
+       console.log(JSON.stringify(blog));
+       console.log(blog[0].id);
+       var indexblog= this.$store.state.blogIndex;
+       console.log(indexblog);
+        var currentBlog = blog.filter( (blogItem) => blogItem.id == this.$store.state.blogIndex );
+         console.log(currentBlog);
+        return currentBlog;
     }
     }
 
@@ -68,8 +81,6 @@ width: 90vw;
     position: absolute;
     z-index: 111;
     opacity: 1%;
- 
-
 }
 
 .remove{
