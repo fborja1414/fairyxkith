@@ -1,6 +1,6 @@
 <template>
 <div :class="'component-container-' + entry.id" @click='toggleWindow'>
-    <div class="blog-container" v-if="entry.BlogBool" :class= entry.position>
+    <div class="blog-container" v-if="entry.attributes.Blog" :class= entry.position>
            <div class="window">
         <div class="window-bar">
           <div class="window-circles">
@@ -16,7 +16,7 @@
             <img class="image" src="../assets/pompompurin-sanrio.gif" @load="setBlogDimension" /> 
              </div>
             <div>
-             <div v-if="entry.title != ''" class="blog-title">{{entry.Title}}</div>
+             <div v-if="entry.title != ''" class="blog-title">{{entry.BlogTitle}}</div>
             <div v-if="entry.date != ''" class="blog-date">{{entry.date}}</div>
             <div v-if="entry.bodytext != ''" class="blog-text">{{entry.bodytext}}</div>
             </div>
@@ -27,7 +27,7 @@
           </div>
           </div>
     </div>
-    <div class="note-container" v-if="entry.NoteBool" :class= entry.position>
+    <div class="note-container" v-if="entry.attributes.Note" :class= entry.position>
           <div class="window">
         <div class="window-bar">
           <div class="window-circles">
@@ -39,7 +39,8 @@
             </div>
       </div>
         <div class="note-wrapper">
-            <div class="note-text">{{entry.Title}}</div>
+            <div class="note-text">{{entry.BlogTitle}}</div>
+            <div>{{entry.data}}</div>
             </div>
         </div>
     </div>
@@ -50,14 +51,14 @@
 export default {
     name:"Blog",
     props:{
-        entry:Object,
+        entry: Object,
     },
 
     methods:{
         toggleWindow(){
             if(!this.entry.NoteBool)
             this.$store.commit('togglePop',true);
-            this.$store.commit('updateBlogIndex',this.entry.index);
+            this.$store.commit('updateBlogIndex',this.entry.id);
         },
         // in backend set blog width using Max Width but image width will always be default image width size
         // for image only posts, title is omitted

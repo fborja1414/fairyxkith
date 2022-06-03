@@ -10,8 +10,9 @@
           <div class="window_circles"></div>
           <div class="blog-index">Blog {{ }}</div>
           </div>
-            </div>
+          
       </div>
+               </div>
          </div>
         </div>
 </template>
@@ -20,7 +21,7 @@
 export default {
     name:"BlogComponent",
     props: {
-        Blog:Array,
+        blogs:Object,
     },
 
     computed:{
@@ -35,25 +36,28 @@ export default {
             const windowBoolean = this.$store.state.popBool;
             if(windowBoolean) {
                 document.body.classList.add("switchoverflow");
-                this.filterBlog(this.Blog);
+                this.filterBlog(this.blogs);
             } else{
                 document.body.classList.remove("switchoverflow");
             }
         }
     },
 
+mounted(){
+    this.filterBlog(this.blogs);
+},
     methods:{
     toggleWindowOff(){
         this.$store.commit("togglePop", false);
     },
     filterBlog(blog){
        console.log(JSON.stringify(blog));
-       console.log(blog[0].id);
+       console.log(blog.data[0].id);
        var indexblog= this.$store.state.blogIndex;
        console.log(indexblog);
-        var currentBlog = blog.filter( (blogItem) => blogItem.id == this.$store.state.blogIndex );
-         console.log(currentBlog);
-        return currentBlog;
+        const currentBlog = blog.data.filter( (blogItem) => blogItem.id == this.$store.state.blogIndex );
+         console.log(JSON.stringify(currentBlog));
+        return { currentBlog };
     }
     }
 

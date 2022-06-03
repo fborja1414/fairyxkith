@@ -1,6 +1,6 @@
 export const state = () =>({
     popBool: false,
-    blogIndex: 0,
+    blogIndex: 1,
 });
 
 export const mutations={

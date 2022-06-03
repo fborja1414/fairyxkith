@@ -6,7 +6,7 @@
           </div>
   </div>
   <div class="innerPage">
-    <blog-component :Blog="Blog"/>
+    <blog-component :blogs="blogs"/>
     </div>
     <div class="index_filter" :class="{'fadeIn': windowToggle, 'fadeOut': !windowToggle}"></div>
   <div class="index-wrapper">
@@ -57,7 +57,7 @@
             <p class="hk-text"> Links </p>
           </div>
           </div>
-          <div v-for="(entry,index) in Blog" :key="index">
+          <div v-for="(entry,index) in blogs.data" :key="index">
           <blog :entry="entry"/>
           </div>
     </div>
@@ -67,48 +67,25 @@
 <script>
 import Blog from '../components/Blog.vue';
 import BlogComponent from '../components/BlogComponent.vue';
+import {BlogQuery} from '~/graphql/query';
+
 export default {
   components: { Blog, BlogComponent },
   name:"Index",
 
     data(){
         return{
-            Blog:[
-            {
-                BlogBool:true,
-                imageBool:true,
-                id:1,
-                Title: "",
-                date: "",
-                bodytext: "",
-                position: "right-offset-window",
-                maxWidth: null,
-            },
-            {
-                BlogBool:true,
-                id:2,
-                Title: "Fairy Kith Blog Title",
-                date: "May 23,2022",
-                bodytext: "Knock on the door at the drew house and expect to be greeted by a group of friends—or as they consider themselves, family—surrounded by skateboards, teddy bears, and VHS tapes from garage sale scores. Located in the San Fernando Valley, the real-life home that gives shape to the eponymous clothing label founded in 2018 by Justin Bieber and creative director Ryan Good is",
-                 position: "center-offset-window"
-            },
-            {
-              NoteBool:true,
-              id:3,
-              Title:"Hi Welcome  overflow:hidden;  overflow:hidden; overflow:hidden; overflow:hidden;",
-              position: "left-offset-window"
-            },
-            {
-                BlogBool:true,
-                id:4,
-                Title: "Fairy Kith Blog Title",
-                date: "May 23,2022",
-                bodytext: "Knock on the door at the drew house and expect to be greeted by a group of friends—or as they consider themselves, family—surrounded by skateboards, teddy bears, and VHS tapes from garage sale scores. Located in the San Fernando Valley, the real-life home that gives shape to the eponymous clothing label founded in 2018 by Justin Bieber and creative director Ryan Good is",
-                position: "center-leftset-window"
-            },
-            ]    
+            blogs:[]    
         };
     },
+    apollo:{
+      blogs:{
+        prefetch:true,
+        query: BlogQuery,
+      }
+     
+    },
+    
     computed:{
       windowToggle(){
         return this.$store.state.popBool;
