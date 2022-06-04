@@ -90,6 +90,15 @@ export default {
       windowToggle(){
         return this.$store.state.popBool;
       },
+
+      // blogs(){
+      //   const blogs = this.blogsraw.sort(function(firstItem, secondItem){
+      //     return firstItem.id - secondItem.id;
+      //   });
+      //   console.log("blogs");
+      //   console.log(blogs);
+      //   return blogs;
+      // }
     },
 }
 </script>

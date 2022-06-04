@@ -13,6 +13,13 @@
           
       </div>
                </div>
+               <div class="innerpage_content">
+                   
+            
+                    {{currentBlog}}
+                   
+                  
+                  </div>
          </div>
         </div>
 </template>
@@ -22,6 +29,12 @@ export default {
     name:"BlogComponent",
     props: {
         blogs:Object,
+    },
+
+    data(){
+        return{
+            curBlog:[],
+        };
     },
 
     computed:{
@@ -52,12 +65,12 @@ mounted(){
     },
     filterBlog(blog){
        console.log(JSON.stringify(blog));
-       console.log(blog.data[0].id);
+      // console.log(blog.data.attributes.id);
        var indexblog= this.$store.state.blogIndex;
        console.log(indexblog);
         const currentBlog = blog.data.filter( (blogItem) => blogItem.id == this.$store.state.blogIndex );
          console.log(JSON.stringify(currentBlog));
-        return { currentBlog };
+        this.curBlog = {currentBlog};
     }
     }
 
@@ -86,6 +99,42 @@ width: 90vw;
     z-index: 111;
     opacity: 1%;
 }
+
+.innerpage_content{
+    display:flex;
+    justify-content: center;
+    padding:5rem;
+}
+
+.blog-index{
+      font-family: PPNeueBit-Bold;
+    font-size:18px;
+        color:  #E7A6BE;
+}
+
+.blog-title{
+    font-family: PPNeueBit-Bold;
+    font-size: 50px;
+    color:  #E7A6BE;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.blog-date{
+    font-family: PPNeueBit-Bold;
+    font-size:18px;
+    color:  #E7A6BE;
+    margin-bottom:3rem;
+}
+
+.blog-text{
+    font-family: PPMondewest-Regular;
+    font-size:20px;
+    height:20vh;
+    overflow:hidden;
+    color:  #E7A6BE;
+}
+
 
 .remove{
     display:none;

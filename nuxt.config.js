@@ -36,10 +36,11 @@ export default {
     "@nuxtjs/apollo",
   ],
 
+
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://quiet-peak-82346.herokuapp.com/graphql',
+        httpEndpoint: "https://quiet-peak-82346.herokuapp.com/graphql",
         inMemoryCacheOptions: {
           addTypename: false,
         },

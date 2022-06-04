@@ -9,6 +9,10 @@ query BlogQuery{
           BlogTitle
           Blog
           Note
+          NoteText
+          BlogText
+          BlogDate
+          position
           StartingImage{
           data{
             id
