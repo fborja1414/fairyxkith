@@ -10,16 +10,11 @@
           <div class="window_circles"></div>
           <div class="blog-index">Blog {{ }}</div>
           </div>
-          
-      </div>
+             </div>
                </div>
-               <div class="innerpage_content">
-                   
-            
-                    {{currentBlog}}
-                   
-                  
-                  </div>
+               <div >
+             {{curBlog.attributes}}
+             </div>
          </div>
         </div>
 </template>
@@ -31,16 +26,19 @@ export default {
         blogs:Object,
     },
 
-    data(){
-        return{
-            curBlog:[],
-        };
-    },
+    // data(){
+    //     return{
+    //         curBlog:Object,
+    //     };
+    // },
 
     computed:{
         windowToggle(){
             return this.$store.state.popBool;
-        }
+        },
+        curBlog(){
+            return this.$store.state.blogs;
+        },
     },
 
 
@@ -49,29 +47,29 @@ export default {
             const windowBoolean = this.$store.state.popBool;
             if(windowBoolean) {
                 document.body.classList.add("switchoverflow");
-                this.filterBlog(this.blogs);
+                // this.filterBlog(this.blogs);
             } else{
                 document.body.classList.remove("switchoverflow");
             }
         }
     },
 
-mounted(){
-    this.filterBlog(this.blogs);
-},
+// mounted(){
+//     this.filterBlog(this.blogs);
+// },
     methods:{
     toggleWindowOff(){
         this.$store.commit("togglePop", false);
     },
-    filterBlog(blog){
-       console.log(JSON.stringify(blog));
-      // console.log(blog.data.attributes.id);
-       var indexblog= this.$store.state.blogIndex;
-       console.log(indexblog);
-        const currentBlog = blog.data.filter( (blogItem) => blogItem.id == this.$store.state.blogIndex );
-         console.log(JSON.stringify(currentBlog));
-        this.curBlog = {currentBlog};
-    }
+    // filterBlog(blog){
+    //    console.log(JSON.stringify(blog));
+    //   // console.log(blog.data.attributes.id);
+    //    var indexblog= this.$store.state.blogIndex;
+    //    console.log(indexblog);
+    //     const currentBlog = blog.data.filter( (blogItem) => blogItem.id == this.$store.state.blogIndex );
+    //      console.log(typeof (currentBlog));
+    //     this.curBlog = currentBlog;
+    // }
     }
 
 }

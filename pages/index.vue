@@ -6,7 +6,7 @@
           </div>
   </div>
   <div class="innerPage">
-    <blog-component :blogs="blogs"/>
+    <blog-component />
     </div>
     <div class="index_filter" :class="{'fadeIn': windowToggle, 'fadeOut': !windowToggle}"></div>
   <div class="index-wrapper">
@@ -57,7 +57,7 @@
             <p class="hk-text"> Links </p>
           </div>
           </div>
-          <div v-for="(entry,index) in blogs.data" :key="index">
+          <div v-for="(entry,index) in blogssorted" :key="index">
           <blog :entry="entry"/>
           </div>
     </div>
@@ -83,22 +83,24 @@ export default {
         prefetch:true,
         query: BlogQuery,
       }
-     
     },
     
+    mounted(){
+       //console.log("mountedsort" + JSON.stringify(this.blogssorted));
+      this.$store.commit("saveBlogs",this.blogs);
+      // this.$store.commit("filterBlogs", this.blogs);
+    },
     computed:{
       windowToggle(){
         return this.$store.state.popBool;
       },
 
-      // blogs(){
-      //   const blogs = this.blogsraw.sort(function(firstItem, secondItem){
-      //     return firstItem.id - secondItem.id;
-      //   });
-      //   console.log("blogs");
-      //   console.log(blogs);
-      //   return blogs;
-      // }
+      blogssorted(){
+        const blogs = this.blogs.data.sort(function(firstItem, secondItem){
+          return firstItem.id - secondItem.id;
+        });
+        return blogs;
+      }
     },
 }
 </script>

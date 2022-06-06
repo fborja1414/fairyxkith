@@ -59,6 +59,7 @@ export default {
             if(!this.entry.attributes.Note)
             this.$store.commit('togglePop',true);
             this.$store.commit('updateBlogIndex',this.entry.id);
+            this.$store.commit('saveBlogs',this.entry);
         },
         // in backend set blog width using Max Width but image width will always be default image width size
         // for image only posts, title is omitted
@@ -158,7 +159,7 @@ export default {
     cursor:pointer;
     position:relative;
     background:white;
-    overflow:scroll;
+    overflow:hidden;
     z-index: 4;
     width:52vw;
     height:25vw;
