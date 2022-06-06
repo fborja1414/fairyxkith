@@ -15,7 +15,7 @@ export const mutations={
     },
     saveBlogs(state,value){
         state.blogs = value;
-        console.log(JSON.stringify(value));
+        console.log("blogs" + JSON.stringify(value));
     },
     // filterBlogs(state,value){
     //     const currentBlog = value.data.filter( (blogItem) => blogItem.id == state.blogIndex );

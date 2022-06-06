@@ -69,23 +69,20 @@ export default {
             let image=document.querySelector(".image");
             console.log(image);
             var imageWidth = image.clientWidth;
-            var imageHeight = image.clientHeight;
             //  image.style.maxWidth = this.entry.maxWidth + "vw";
            // console.log
             //var imageWidth = imageDims.x;
-            console.log(imageWidth);
             var blogString = '.component-container-' + this.entry.id;
-            console.log(blogString);
             var currBlog = document.querySelector('.blog-container-' + this.entry.id);
-          console.log(currBlog);
+          const windowWidth = window.innerWidth;
+            const viewWidth = 100 * imageWidth/windowWidth;
        if(this.entry.maxWidth !=null){ 
             currBlog.style.width = this.entry.maxWidth +  "vw";
             currBlog.style.height = this.entry.maxWidth +  "vw";
          currBlog.style.maxWidth = this.entry.maxWidth + "vw";
             }
             else{
-   currBlog.style.width= imageWidth + 50 + 'px';
-          currBlog.style.height = imageHeight + 100 + 'px';
+          currBlog.style.width= viewWidth + 4 + 'vw';
             
             }
             // let imageContainer = image.q

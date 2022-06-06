@@ -110,6 +110,7 @@ export default {
 
 .overlay{
   overflow-x: hidden;
+  overflow:hidden;
 }
 .overlay-wrapper{
   outline:none;
@@ -123,7 +124,7 @@ export default {
     position:fixed;
     z-index: 1;
     background-image: url("../assets/mesh-gradient.png");
-    height:200vw;
+    height:300vh;
   }
 .transparency_desktop{
   width:100vw;

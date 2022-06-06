@@ -20,6 +20,12 @@ export default {
   css: [
   ],
 
+  vue:{
+    config: {
+      devtools: process.env.DEV_STATE !== 'production',
+    },
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
