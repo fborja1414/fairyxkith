@@ -116,6 +116,7 @@ width: 90vw;
 .innerpage-wrapper{
     padding:1rem;
     text-align: center;
+    height:100%;
 
 }
 
