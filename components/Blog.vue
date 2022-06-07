@@ -39,7 +39,7 @@
             </div>
       </div>
         <div class="note-wrapper">
-            <div class="note-text">{{entry.attributes.NoteText}}</div>
+            <div class="note-text" :class="entry.attributes.NoteColor">{{entry.attributes.NoteText}}</div>
             <div></div>
             </div>
         </div>
@@ -76,10 +76,10 @@ export default {
             var currBlog = document.querySelector('.blog-container-' + this.entry.id);
           const windowWidth = window.innerWidth;
             const viewWidth = 100 * imageWidth/windowWidth;
-       if(this.entry.maxWidth !=null){ 
-            currBlog.style.width = this.entry.maxWidth +  "vw";
-            currBlog.style.height = this.entry.maxWidth +  "vw";
-         currBlog.style.maxWidth = this.entry.maxWidth + "vw";
+       if(this.entry.attributes.maxWidth){ 
+            currBlog.style.width = this.entry.attributes.maxWidth +  "vw";
+            currBlog.style.height = this.entry.attributes.maxWidth +  "vw";
+         currBlog.style.maxWidth = this.entry.attributes.maxWidth + "vw";
             }
             else{
           currBlog.style.width= viewWidth + 4 + 'vw';
@@ -242,6 +242,29 @@ export default {
        overflow:scroll;
     color:#EFFF8B;
 }
+
+.Pink{
+    color: #FFAFCD;
+}
+ //yellow
+ .Yellow{
+ color:#EFFF8B;
+ }
+ //green
+ .Green{
+ color:#A1DB66;
+ }
+ //blue
+ .Blue{
+ color:#7CD2ED;
+ }
+
+
+//white
+.White{
+color:#ffffff;
+}
+
 .right1{
     margin-left: 60vw;
     transform: translateY(-12vw);

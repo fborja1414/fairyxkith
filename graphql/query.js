@@ -13,6 +13,8 @@ query BlogQuery{
           BlogText
           BlogDate
           position
+          maxWidth
+          NoteColor
           StartingImage{
           data{
             id
