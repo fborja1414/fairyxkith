@@ -147,7 +147,7 @@ width: 90vw;
     text-align: left;
     font-family: PPMondewest-Regular;
     font-size:20px;
-    height:20vh;
+    height:100%;
     overflow:scroll;
     color:  #E7A6BE;
 }
