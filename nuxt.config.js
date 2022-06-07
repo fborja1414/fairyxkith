@@ -17,7 +17,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    devState: process.env.DEV_STATE || 'development',
+    devState: process.env.DEV_STATE || 'production',
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
