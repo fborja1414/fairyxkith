@@ -12,7 +12,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/fairyfavicon.png' }
     ]
   },
 
@@ -67,6 +67,9 @@ export default {
       scss: {
         implementation: require('sass'),
       },
+      vue: {
+        compiler: require('vue-template-babel-compiler')
+      }
     },
   }
 }

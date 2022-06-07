@@ -156,7 +156,7 @@ export default {
     cursor:pointer;
     position:relative;
     background:white;
-    overflow:hidden;
+    overflow:scroll;
     z-index: 4;
     width:52vw;
     height:25vw;

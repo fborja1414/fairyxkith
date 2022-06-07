@@ -12,8 +12,17 @@
           </div>
              </div>
                </div>
-               <div >
-             {{curBlog.attributes}}
+               <div class="innerpage-wrapper" v-if="curBlog.attributes?.StartingImage">
+
+            <img v-if="curBlog.attributes?.StartingImage.data" class="image" :src="curBlog.attributes.StartingImage.data.attributes.url" loading="lazy" /> 
+             
+            <div>
+             <div v-if="curBlog.attributes?.BlogTitle" class="innerpage-title">{{curBlog.attributes.BlogTitle}}</div>
+            <div v-if="curBlog.attributes?.BlogDate" class="innerpage-date">{{curBlog.attributes.BlogDate}}</div>
+            <div v-if="curBlog.attributes?.BlogText" class="innerpage-text">{{curBlog.attributes.BlogText}}</div>
+           
+          </div>
+                
              </div>
          </div>
         </div>
@@ -104,13 +113,20 @@ width: 90vw;
     padding:5rem;
 }
 
-.blog-index{
+.innerpage-wrapper{
+    padding:1rem;
+    text-align: center;
+
+}
+
+.innerpage-index{
       font-family: PPNeueBit-Bold;
     font-size:18px;
         color:  #E7A6BE;
 }
 
-.blog-title{
+.innerpage-title{
+    text-align: center;
     font-family: PPNeueBit-Bold;
     font-size: 50px;
     color:  #E7A6BE;
@@ -118,14 +134,16 @@ width: 90vw;
     margin-bottom: 1rem;
 }
 
-.blog-date{
+.innerpage-date{
+    text-align: center;
     font-family: PPNeueBit-Bold;
     font-size:18px;
     color:  #E7A6BE;
     margin-bottom:3rem;
 }
 
-.blog-text{
+.innerpage-text{
+    text-align: left;
     font-family: PPMondewest-Regular;
     font-size:20px;
     height:20vh;

@@ -1,5 +1,7 @@
 <template>
-  <div class="overlay">
+
+  <div class="overlay" >
+
     <div class="overlay-grid">
       <div class="transparency-checker">
         <img class="transparency_desktop" src="../assets/pink_pattern_transparent.png"/>
@@ -61,7 +63,9 @@
           <blog :entry="entry"/>
           </div>
     </div>
+ 
   </div>
+ 
 </template>
 
 <script>
@@ -88,6 +92,10 @@ export default {
     mounted(){
        //console.log("mountedsort" + JSON.stringify(this.blogssorted));
       this.$store.commit("saveBlogs",this.blogs);
+      console.log(this.windowMaxHeight);
+      this.setWindowHeight();
+      window.addEventListener('resize', this.setWindowHeight);
+
       // this.$store.commit("filterBlogs", this.blogs);
     },
     computed:{
@@ -100,8 +108,25 @@ export default {
           return firstItem.id - secondItem.id;
         });
         return blogs;
+      },
+      windowMaxHeight(){
+        var height = document.querySelector(".index-wrapper").clientHeight;
+        console.log(height);
+        return height ;
       }
+
     },
+
+    methods:{
+      setWindowHeight(){
+          var height = document.querySelector(".index-wrapper").clientHeight;
+        var overlay = document.querySelector(".overlay");
+        console.log("insetwindowheight");
+        overlay.style.height = height + 500 + 'px';
+      }
+    }
+  
+
 }
 </script>
 
@@ -124,7 +149,7 @@ export default {
     position:fixed;
     z-index: 1;
     background-image: url("../assets/mesh-gradient.png");
-    height:300vh;
+    height:100vh;
   }
 .transparency_desktop{
   width:100vw;
