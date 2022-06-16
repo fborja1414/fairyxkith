@@ -12,10 +12,10 @@ export const mutations={
     },
     updateBlogIndex(state, value){
         state.blogIndex = value;
+        console.log(value);
     },
     saveBlogs(state,value){
         state.blogs = value;
-        console.log("blogs" + JSON.stringify(value));
     },
     // filterBlogs(state,value){
     //     const currentBlog = value.data.filter( (blogItem) => blogItem.id == state.blogIndex );

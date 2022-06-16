@@ -16,20 +16,11 @@ export default {
     ]
   },
 
-  publicRuntimeConfig: {
-    devState: process.env.DEV_STATE || 'production',
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
 
-  vue:{
-    config: {
-      devtools: process.env.DEV_STATE !== 'production',
-    },
-  },
-
+ 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],

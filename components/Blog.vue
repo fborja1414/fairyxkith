@@ -1,6 +1,6 @@
 <template>
-<div :class="'component-container-' + entry.id" @click='toggleWindow'>
-    <div class="blog-container" v-if="entry.attributes.Blog" :class= "[entry.attributes.position, 'blog-container-' + entry.id]">
+<div class="component-container" id="component" :class="'component-container-' + entry.id" @click='toggleWindow'>
+    <div class="blog-container" v-if="entry.attributes.Blog" :class= "['blog-container-' + entry.id]">
            <div class="window">
         <div class="window-bar">
           <div class="window-circles">
@@ -13,7 +13,7 @@
       </div>
         <div class="blog-wrapper">
 
-            <img v-if="entry.attributes.StartingImage.data != null" class="image" :src="entry.attributes.StartingImage.data.attributes.url" @load="setBlogDimension" /> 
+            <img v-if="entry.attributes.StartingImage.data != null" class="image" :src="entry.attributes.StartingImage.data.attributes.url" @load="setBlogDimension"/> 
              
             <div>
              <div v-if="entry.attributes.BlogTitle != ''" class="blog-title">{{entry.attributes.BlogTitle}}</div>
@@ -52,6 +52,13 @@ export default {
     name:"Blog",
     props:{
         entry: Object,
+
+    },
+
+    data(){
+        return{
+            toggleBlog: false,
+        };
     },
 
     methods:{
@@ -60,6 +67,7 @@ export default {
             this.$store.commit('togglePop',true);
             this.$store.commit('updateBlogIndex',this.entry.id);
             this.$store.commit('saveBlogs',this.entry);
+          
         },
         // in backend set blog width using Max Width but image width will always be default image width size
         // for image only posts, title is omitted
@@ -86,38 +94,54 @@ export default {
             
             }
             // let imageContainer = image.q
+        },
+
+        setWindowPos(){
+               var currBlog = document.querySelector('.blog-container-' + this.entry.id);
+             var offset = [0,0];
+            var divOverlay = document.querySelectorAll('.blog-container').forEach( (blog)  => blog.addEventListener('mousedown',(e) => {
+                if(this.$store.state.blogIndex == this.entry.id){
+                     this.$store.commit('updateBlogIndex',this.entry.id);
+                     isDown = true;
+                        offset = [
+                            currBlog.offsetLeft - e.clientX,
+                            currBlog.offsetTop - e.clientY
+                        ];
+                        }}));
+            
+    console.log(divOverlay);
+    var isDown = false;
+
+// divOverlay.addEventListener('mousedown', function(e) {
+// isDown = true;
+// offset = [
+//     divOverlay.offsetLeft - e.clientX,
+//     divOverlay.offsetTop - e.clientY
+//  ];
+ //}, true);
+
+document.addEventListener('mouseup', function() {
+   isDown = false;
+}, true);
+
+
+
+document.addEventListener('mousemove', (e) => {
+    e.preventDefault();
+    if (isDown && this.$store.state.blogIndex == this.entry.id) {
+        console.log("inmousemove");
+        currBlog.style.left = (e.clientX + offset[0]) + 'px';
+        currBlog.style.top  = (e.clientY + offset[1]) + 'px';
+   }
+}, true);
         }
 
     },
 
 
-//     mounted() {
-//        var divOverlay = document.querySelector(".component-container-" + this.entry.id );
-//        console.log(divOverlay);
-//         var isDown = false;
-// divOverlay.addEventListener('mousedown', function(e) {
-//     isDown = true;
-//       console.log(isDown);
-// }, true);
-
-// document.addEventListener('mouseup', function() {
-//   isDown = false;
-// }, true);
-
-// document.addEventListener('mousemove', function(event) {
-//    event.preventDefault();
-//    if (isDown) {
-//    var deltaX = event.movementX;
-//    var deltaY = event.movementY;
-//    console.log(deltaX);
-//    console.log(deltaY);
-//   var rect = divOverlay.getBoundingClientRect();
-//   console.log(rect);
-//  // divOverlay.style.transform = 'translate(' + rect.x + deltaX + 'px,' + rect.y + deltaY + 'px)';
-//  // divOverlay.style.position = "relative";
-//  }
-// }, true);
-//     },
+    mounted() {
+        this.setWindowPos();
+     }
 }
 
 </script>
@@ -152,6 +176,7 @@ export default {
 }
 
 //change width for mobile
+
 .blog-container{
     cursor:pointer;
     position:relative;
@@ -163,6 +188,8 @@ export default {
     border:1px solid #E7A6BE;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
+
+
 
 .blog-wrapper{
    // max-width:30rem;
@@ -242,6 +269,8 @@ export default {
        overflow:scroll;
     color:#EFFF8B;
 }
+
+
 
 .Pink{
     color: #FFAFCD;

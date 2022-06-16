@@ -59,7 +59,7 @@
             <p class="hk-text"> Links </p>
           </div>
           </div>
-          <div v-for="(entry,index) in blogssorted" :key="index">
+          <div class="blog-overview" v-for="(entry,index) in blogssorted" :key="index">
           <blog :entry="entry"/>
           </div>
     </div>
@@ -332,7 +332,9 @@ padding-bottom:50px;
     margin-bottom: 1rem;
 }
 
-
+.blog-overview{
+  position:relative;
+}
 
 
 
