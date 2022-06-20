@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.17.12",
+    "@nuxtjs/vercel-builder": "^0.22.1",
     "sass": "^1.52.2",
     "sass-loader": "10.1.1",
     "vue-template-babel-compiler": "^1.2.0"
