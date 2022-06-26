@@ -157,7 +157,7 @@ export default {
 }
 
 .index-wrapper{
-  height:200vw;
+  //height:200vw;
 }
 
 .innerPage{

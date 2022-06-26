@@ -1,7 +1,7 @@
 <template>
-<div class="component-container" id="component" :class="'component-container-' + entry.id" @click='toggleWindow'>
+<div class="component-container" id="component" :class="'component-container-' + entry.id" >
     <div class="blog-container" v-if="entry.attributes.Blog" :class= "['blog-container-' + entry.id]">
-           <div class="window">
+           <div class="window" @mousedown="setWindowPos($event)" v-on:mouseup="resetWindow" >
         <div class="window-bar">
           <div class="window-circles">
           <div class="window_circles"></div>
@@ -11,7 +11,7 @@
           </div>
             </div>
       </div>
-        <div class="blog-wrapper">
+        <div class="blog-wrapper"  @click='toggleWindow'>
 
             <img v-if="entry.attributes.StartingImage.data != null" class="image" :src="entry.attributes.StartingImage.data.attributes.url" @load="setBlogDimension"/> 
              
@@ -27,8 +27,8 @@
           </div>
           </div>
     </div>
-    <div class="note-container" :class= "entry.attributes.position" v-if="entry.attributes.Note">
-          <div class="window">
+    <div class="note-container"  @click='toggleWindow' :class= "entry.attributes.position" v-if="entry.attributes.Note">
+          <div class="window" >
         <div class="window-bar">
           <div class="window-circles">
           <div class="window_circles"></div>
@@ -58,10 +58,18 @@ export default {
     data(){
         return{
             toggleBlog: false,
+            isDown:false,
         };
     },
 
     methods:{
+
+        initializeWindow(){
+            var currBlog = document.querySelector('.blog-container-' + this.entry.id);
+              console.log(currBlog);
+            currBlog?.classList.add(this.entry.attributes.position);
+        },
+
         toggleWindow(){
             if(!this.entry.attributes.Note)
             this.$store.commit('togglePop',true);
@@ -96,22 +104,30 @@ export default {
             // let imageContainer = image.q
         },
 
-        setWindowPos(){
-               var currBlog = document.querySelector('.blog-container-' + this.entry.id);
-             var offset = [0,0];
-            var divOverlay = document.querySelectorAll('.blog-container').forEach( (blog)  => blog.addEventListener('mousedown',(e) => {
-                if(this.$store.state.blogIndex == this.entry.id){
-                     this.$store.commit('updateBlogIndex',this.entry.id);
-                     isDown = true;
+        setWindowPos(e){
+               
+              var currBlog = document.querySelector('.blog-container-' + this.entry.id);
+               var offset = [0,0];
+                console.log(currBlog.offsetLeft + "offsetleft");
+                 this.$store.commit('updateBlogIndex',this.entry.id);
+  
+                    
+                     this.isDown = true;
                         offset = [
                             currBlog.offsetLeft - e.clientX,
                             currBlog.offsetTop - e.clientY
                         ];
-                        }}));
-            
-    console.log(divOverlay);
-    var isDown = false;
-
+                        document.addEventListener('mousemove', (e) => {
+                            e.preventDefault();
+   if (this.isDown) {
+        console.log("inmousemove");
+        console.log(e.clientX);
+        currBlog.style.left = (e.clientX + offset[0]) + 'px';
+        currBlog.style.top  = (e.clientY + offset[1]) + 'px';
+    }
+                        })
+           
+  
 // divOverlay.addEventListener('mousedown', function(e) {
 // isDown = true;
 // offset = [
@@ -120,27 +136,20 @@ export default {
 //  ];
  //}, true);
 
-document.addEventListener('mouseup', function() {
-   isDown = false;
-}, true);
+        },
 
 
 
-document.addEventListener('mousemove', (e) => {
-    e.preventDefault();
-    if (isDown && this.$store.state.blogIndex == this.entry.id) {
-        console.log("inmousemove");
-        currBlog.style.left = (e.clientX + offset[0]) + 'px';
-        currBlog.style.top  = (e.clientY + offset[1]) + 'px';
-   }
-}, true);
-        }
+resetWindow(){
 
+   this.isDown = false;
+       console.log(this.isDown);
+},
     },
 
 
     mounted() {
-        this.setWindowPos();
+        this.initializeWindow();
      }
 }
 
@@ -152,8 +161,10 @@ document.addEventListener('mousemove', (e) => {
 .window{
   z-index: 5;
   cursor: pointer;
+  position:sticky;
+  background:white;
+  top:0px;
 }
-
 .window-bar {
     height: 24px;
     border-top: 1px solid #E7A6BE;
@@ -295,45 +306,46 @@ color:#ffffff;
 }
 
 .right1{
-    margin-left: 60vw;
+    left:60vw;
     transform: translateY(-12vw);
-    z-index:100;
+  //  z-index:100;
 }
 
 .center1{
-    margin-left:30vw;
+   left: 30vw;
     transform: translateY(-20vw);
-    z-index:5;
+   // z-index:5;
 }
 
 .center2{
-    margin-left:25vw;
+  left:25vw;
     transform: translateY(-30vw);
     z-index:5;
 }
 
 .left1{
-    margin-left: 5vw;
+  //  margin-left: 5vw;
     transform: translateY(-30vw);
-    z-index:7;
+   left:5vw;
+   // z-index:7;
 }
 
 .right2{
-     margin-left: 50vw;
+    left:50vw;
     transform: translateY(-20vw);
     z-index:6;
 }
 
 .left2{
-     margin-left: 8vw;
+  left:8vw;
     transform: translateY(-40vw);
-    z-index:7;
+   // z-index:7;
 }
 
 .center3{
-    margin-left:25vw;
+   left:25vw;
     transform: translateY(-30vw);
-    z-index:5;
+   // z-index:5;
 }
 
 </style>
