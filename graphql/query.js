@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 export const BlogQuery = gql`
 query BlogQuery{
+  pagination: { limit: 100 }) 
     blogs {
       data{
         id
