@@ -8,6 +8,7 @@ query BlogQuery{
       attributes{
         BlogTitle
         Blog
+        BlogText
         Note
         NoteText
         NoteColor
